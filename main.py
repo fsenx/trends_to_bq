@@ -5,6 +5,6 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 
 def run(request=None):
     df = apiTrends().trends(inicio=None,fim=25)
-    BigQuery('googleTrends',df).toBigQuery('358319','append')
+    BigQuery('googleTrends',df).toBigQuery('project','append')
 
     return 'fim'
