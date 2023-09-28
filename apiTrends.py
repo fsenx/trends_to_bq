@@ -1,4 +1,3 @@
-import twitch
 import pandas as pd
 import datetime
 import pandas_gbq
@@ -30,14 +29,14 @@ class apiTrends():
       trends = TrendReq(hl='pt-br', tz=360)
       Trends_Nome = list(self.dadosContatos()['Trends_Nome'])[inicio:fim]
       nome = list(self.dadosContatos()['Nome'])[inicio:fim]
-      for i in range(len(twitch_nome)):
+      for i in range(len(nome)):
         try:
           sleep(1)
           cont +=1
           print(cont)
           print(Trends_Nome[i])
           trends.build_payload(kw_list=[Trends_Nome[i]],geo='BR',cat=0,timeframe="today 1-m")
-          lista.extend([np.concatenate((trends.interest_over_time().dropna().reset_index().values[x],[twitch_nome[i],nome[i]])) for x in range(len(nome))])
+          lista.extend([np.concatenate((trends.interest_over_time().dropna().reset_index().values[x],[Trends_Nome[i],nome[i]])) for x in range(len(nome))])
         except:
           pass
       df = pd.DataFrame(lista).rename(columns={0:'Data',1:'Valor',2:'Partial',3:'Nome'})
